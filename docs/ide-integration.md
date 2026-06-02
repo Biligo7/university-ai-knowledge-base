@@ -27,16 +27,19 @@ Cursor reads agents from `.cursor/agents/*.md`. Two options:
 
 **Option A — symlink (recommended).** Keeps the repository agents as the single source of truth.
 
+Run these from the **repository root** (the folder that contains `agents/`, `tools/`, and `README.md` — in Cursor, that is usually the folder you opened as the workspace root).
+
 ```bash
+cd university-ai-knowledge-base   # your clone
 mkdir -p .cursor
 ln -s ../agents .cursor/agents
 ```
 
-For per-subject tutors:
+For per-subject tutors (replace `algorithms` with your real subject folder name under `subjects/`):
 
 ```bash
-mkdir -p subjects/<slug>/.cursor
-ln -s ../agents subjects/<slug>/.cursor/agents
+mkdir -p subjects/algorithms/.cursor
+ln -s ../agents subjects/algorithms/.cursor/agents
 ```
 
 **Option B — copy.** If symlinks are awkward on Windows:
