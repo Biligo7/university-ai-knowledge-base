@@ -38,13 +38,15 @@ Run these steps in order. Do not skip steps; if one fails, stop and report the e
    - Briefly report the candidates; then run again with `--apply` unless the user objects.
 6. **Delegate image curation.** Hand control to `image-curator` with the path `subjects/<slug>/`. Wait for it to finish and return a short keep/discard report.
 7. **Delegate format review.** Hand control to `md-formatter` with the same path. Apply the changes it proposes.
-8. **Delegate tutor authoring.** Hand control to `tutor-generator` with subject name, slug, language, and the path. Verify it produced `subjects/<slug>/agents/tutor.md`.
+8. **Delegate tutor authoring.** Hand control to `tutor-generator` with subject name, slug, language, and the path. Verify it produced `subjects/<slug>/agents/<slug>-tutor.md`.
 9. **Write the subject README.** Update `subjects/<slug>/README.md` with the final list of materials (one bullet per category, file count, total page count). The skeleton is already in place from step 2.
 10. **Final report to the user.** List:
     - subject path,
     - number of PDFs ingested per category,
     - number of images kept versus deleted,
     - the path to the new tutor agent and one example prompt the user can try.
+
+**Cursor users:** The root `.cursor/agents/` symlink already points to `agents/`, which contains the pipeline agents. Subject tutors live under `subjects/<slug>/agents/` instead, so they are not automatically visible in the root `.cursor`. The user can reference the tutor file directly (e.g. `@subjects/algorithms/agents/algorithms-tutor.md`) or create an additional symlink if they want it in the Cursor agent picker.
 
 # Rules
 

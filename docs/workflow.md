@@ -50,13 +50,13 @@ It will:
 5. Run `python tools/filter_images.py --assets-dir subjects/algorithms/assets --apply` to delete tiny/duplicate images and prune dead Markdown references.
 6. Hand off to `image-curator`, which opens every remaining image and removes decorative ones (logos, portraits, banners, screenshots).
 7. Hand off to `md-formatter`, which spots-checks the Markdown and applies any leftover formatting fixes.
-8. Hand off to `tutor-generator`, which writes `subjects/algorithms/agents/tutor.md`.
+8. Hand off to `tutor-generator`, which writes `subjects/algorithms/agents/algorithms-tutor.md`.
 
 You should see one short progress line per step.
 
 ### 3. Talk to your tutor
 
-Open `subjects/algorithms/agents/tutor.md` in your IDE and load it as the system prompt (see [`ide-integration.md`](ide-integration.md)). Then ask anything in Greek or English:
+Open `subjects/algorithms/agents/algorithms-tutor.md` in your IDE and load it as the system prompt (see [`ide-integration.md`](ide-integration.md)). Then ask anything in Greek or English:
 
 - *"Δείξε μου ένα παράδειγμα Dynamic Programming από τα slides."*
 - *"What's the recurrence for Mergesort and how do I solve it with the Master Theorem?"*

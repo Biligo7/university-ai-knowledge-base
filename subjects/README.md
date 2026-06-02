@@ -12,7 +12,7 @@ You do not create subject folders by hand. Ask the `kb-initializer` agent (in [`
 subjects/<slug>/
 ├── README.md
 ├── agents/         # subject-scoped agents; the tutor lives here once tutor-generator has run
-│   └── tutor.md
+│   └── <slug>-tutor.md
 ├── assets/         # one subfolder per source PDF, holding extracted images
 ├── kb/             # markdown copies of every source PDF
 │   ├── general/
@@ -26,7 +26,7 @@ subjects/<slug>/
 
 ## Current subjects
 
-_None yet. Run the `kb-initializer` agent to create one._
+- [`algorithms/`](algorithms/) — Algorithms course (Spring 2026): 12 lecture slide decks (English), 11 tutorial sheets (*Φροντιστήριο 1–11*, Greek), midterm 2026 solutions, 2024 final exam, and the official exam-material handout. 26 PDFs · 513 pages · 128 curated images.
 
 When you add a subject, list it here as a one-line bullet pointing to the folder, for example:
 

@@ -27,5 +27,5 @@ regenerate.py              -->   pdf_to_md.py per PDF, then format_md.py
 filter_images.py --apply   -->   mechanical image cleanup
 (image-curator agent)      -->   intelligent image curation with vision
 (md-formatter agent)       -->   visual MD review pass
-(tutor-generator agent)    -->   writes subjects/<slug>/agents/tutor.md
+(tutor-generator agent)    -->   writes subjects/<slug>/agents/<slug>-tutor.md
 ```

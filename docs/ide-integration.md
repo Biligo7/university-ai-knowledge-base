@@ -23,11 +23,9 @@ The `name` and `description` fields are optional in pure-prompt IDEs but useful 
 
 ## Cursor
 
-Cursor reads agents from `.cursor/agents/*.md`. Two options:
+Cursor reads agents from `.cursor/agents/*.md`. There is only **one** `.cursor` directory — at the repository root. Subject-specific tutors are referenced directly by path, not via a separate `.cursor`.
 
-**Option A — symlink (recommended).** Keeps the repository agents as the single source of truth.
-
-Run these from the **repository root** (the folder that contains `agents/`, `tools/`, and `README.md` — in Cursor, that is usually the folder you opened as the workspace root).
+**Option A — symlink (recommended).** Run from the repository root:
 
 ```bash
 cd university-ai-knowledge-base   # your clone
@@ -35,21 +33,20 @@ mkdir -p .cursor
 ln -s ../agents .cursor/agents
 ```
 
-For per-subject tutors (replace `algorithms` with your real subject folder name under `subjects/`):
-
-```bash
-mkdir -p subjects/algorithms/.cursor
-ln -s ../agents subjects/algorithms/.cursor/agents
-```
+This makes the pipeline agents (`kb-initializer`, `image-curator`, etc.) appear in the Cursor agent picker.
 
 **Option B — copy.** If symlinks are awkward on Windows:
 
 ```bash
 mkdir -p .cursor/agents
 cp agents/*.md .cursor/agents/
+# then copy subject specific agents (tutors)
+cp subjects/yoursubject/agents/*.md .cursor/agents/
 ```
 
-Invoke from the chat with `/kb-initializer`, `/image-curator`, etc., or by typing the agent's name.
+**Subject tutors.** After the pipeline runs, the tutor lives at `subjects/<slug>/agents/<slug>-tutor.md` (e.g. `subjects/algorithms/agents/algorithms-tutor.md`). Reference it directly in Cursor with `@subjects/algorithms/agents/algorithms-tutor.md`, or paste its contents into a chat. There is no need for a second `.cursor` directory inside each subject.
+
+Invoke pipeline agents from the chat with `/kb-initializer`, `/image-curator`, etc., or by typing the agent's name.
 
 ---
 
@@ -62,7 +59,7 @@ mkdir -p .claude/agents
 cp agents/*.md .claude/agents/
 ```
 
-Per-subject tutors go under `subjects/<slug>/.claude/agents/`.
+For per-subject tutors, reference `subjects/<slug>/agents/<slug>-tutor.md` directly with `@` or paste the contents.
 
 Invoke with `@kb-initializer` or by mentioning the agent in chat.
 
@@ -75,7 +72,7 @@ Copilot Chat does not have a multi-agent registry, but it does respect `.github/
 - **Single active agent.** Copy the body of one agent file into `.github/copilot-instructions.md`. Swap files when you need a different role.
 - **Chat-time injection.** Open the agent's `.md` file, copy everything below the frontmatter, paste it into the chat as the first message, then ask your question.
 
-For per-subject tutors, the second pattern is the most reliable — keep the tutor file in `subjects/<slug>/agents/tutor.md` and paste it in when you need it.
+For per-subject tutors, the second pattern is the most reliable — keep the tutor file in `subjects/<slug>/agents/<slug>-tutor.md` and paste it in when you need it.
 
 ---
 
@@ -98,15 +95,17 @@ This is the lowest common denominator and works with every assistant.
 After the pipeline finishes, the tutor for a subject lives at:
 
 ```
-subjects/<slug>/agents/tutor.md
+subjects/<slug>/agents/<slug>-tutor.md
 ```
 
-Wire it into your IDE the same way as the root agents — symlink, copy, or paste. The tutor is fully self-contained (it includes the topic index, exam patterns and image pointers in its prompt) so you do not need to attach the kb files separately, but doing so makes citations faster and more accurate.
+For example: `subjects/algorithms/agents/algorithms-tutor.md`.
+
+Wire it into your IDE by referencing the file directly (`@` in Cursor/Claude Code) or by pasting its contents as the system prompt. The tutor is fully self-contained (it includes the topic index, exam patterns and image pointers in its prompt) so you do not need to attach the kb files separately, but doing so makes citations faster and more accurate.
 
 ---
 
 ## Multiple subjects in one workspace
 
-Open the repository as the workspace root. The root agents in `agents/` apply to the whole workspace; the tutor in `subjects/<slug>/agents/tutor.md` is scoped to one subject. In Cursor and Claude Code, both layers are discovered automatically when you symlink the per-subject `.cursor` / `.claude` directories as shown above.
+Open the repository as the workspace root. The root agents in `agents/` apply to the whole workspace (pipeline operations). Each subject's tutor lives under `subjects/<slug>/agents/<slug>-tutor.md`. Reference whichever tutor you need by file path — no nested `.cursor` or `.claude` directories required.
 
-If your IDE does not support nested agent registries, just paste the tutor you currently need into the chat as a system prompt.
+If your IDE does not support file-path references, paste the tutor you currently need into the chat as a system prompt.

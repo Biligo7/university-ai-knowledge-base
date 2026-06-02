@@ -46,7 +46,7 @@ Keeping these two layers separate means the same template works in any IDE: the 
 └──────────┬──────────────┘
            ▼
 ┌─────────────────────────┐
-│ tutor-generator (agent) │  →  subjects/<slug>/agents/tutor.md
+│ tutor-generator (agent) │  →  subjects/<slug>/agents/<slug>-tutor.md
 └──────────┬──────────────┘
            ▼
 ┌─────────────────────────┐
@@ -63,7 +63,7 @@ subjects/<slug>/
 ├── README.md          # summary, layout, how to talk to the tutor
 ├── agents/
 │   ├── README.md
-│   └── tutor.md       # written by tutor-generator
+│   └── <slug>-tutor.md  # written by tutor-generator (e.g. algorithms-tutor.md)
 ├── assets/
 │   └── <pdf-slug>/    # one folder per source PDF
 │       └── p###-i##.{png,jpg}
@@ -92,7 +92,7 @@ Categories are configurable. The defaults (`general`, `slides`, `exams`) cover m
 | Markdown normalisation (bullets, blanks, footers) | `tools/format_md.py` | Pure pattern matching; runs in a fraction of a second. |
 | Heading promotion, code-fencing | `md-formatter` agent | Needs context awareness. |
 | Tutor authoring | `tutor-generator` agent | Needs to read the kb and synthesise a coherent index. |
-| Day-to-day Q&A | per-subject `tutor.md` | The end product. |
+| Day-to-day Q&A | per-subject `<slug>-tutor.md` | The end product. |
 
 ## Adding capabilities
 
