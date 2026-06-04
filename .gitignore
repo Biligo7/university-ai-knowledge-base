@@ -21,6 +21,10 @@ desktop.ini
 .vscode/
 *.swp
 *.swo
+.cursor/
+
+# Specific subjects
+subjects/
 
 # Local notes / drafts (uncomment if you want them ignored)
 # notes/
